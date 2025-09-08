@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  nginx:
+   image: nginx:1.25
+   volumes:
+    - ./default_nginx.conf:/etc/nginx/nginx.conf
+
+   ports: 
+     - 1234:80
+   networks:
+     - vita
+   depends_on:
+     - php
+
+  php:
+    image: php:7.4-fpm-alpine3.16
+    volumes:
+      - ./:/var/local/sandboxes/dev/www 
+    environment: 
+      - PHP_FPM_LISTEN=0.0.0.0:9000   
+    networks:
+      - vita
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:15
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_DB=${POSTGRES_DB}
+    networks:
+      - vita
+
+networks:
+  vita:
+   driver: bridge

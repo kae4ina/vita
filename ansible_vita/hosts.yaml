@@ -1,0 +1,10 @@
+all:
+  children:
+    servers:
+      vars:
+        ansible_user: root
+      hosts:
+        ct-ubuntu-1:
+          ansible_host: 192.168.9.51
+        ct-ubuntu-2:
+          ansible_host: 192.168.9.52

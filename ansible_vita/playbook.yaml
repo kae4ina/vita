@@ -1,0 +1,11 @@
+- name: Copy Files
+  hosts: servers
+
+  vars: 
+    source_folder: "./files"
+    dest_folder: "/"
+  tasks:
+   - name: Copy folder
+     copy:
+      src: "{{source_folder}}"
+      dest: "{{dest_folder}}"
