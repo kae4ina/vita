@@ -1,5 +1,5 @@
-defaults]
+[defaults]
 
 inventory = ./hosts.yaml
-host_key_checking = fals
+host_key_checking = false
 
